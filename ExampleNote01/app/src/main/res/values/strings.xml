@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">ExampleNote01</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Notes -->
+    <string name="title_activity_notes">Todas las Notas</string>
+
+    <!-- Notes Item -->
+    <string name="title_note_item">Empresas</string>
+    <string name="description_note_item">Joinnus, Dvelivery, App Perú, Cornershop y Belatrix</string>
+
+    <!-- Detail Notes Item -->
+    <string name="title_activity_detail_notes">Detalle de Notas</string>
+    <string name="hint_title_detail_notes">Titulo</string>
+    <string name="hint_description_detail_notes">Descripción</string>
+    <string name="button_save_detail_notes">Guardar</string>
+
+</resources>
