@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ExampleNote01</string>
+    <string name="app_name">Evernote Pirata</string>
     <string name="action_settings">Settings</string>
 
     <!-- Notes -->
@@ -14,5 +14,6 @@
     <string name="hint_title_detail_notes">Titulo</string>
     <string name="hint_description_detail_notes">Descripción</string>
     <string name="button_save_detail_notes">Guardar</string>
+    <string name="action_delete_detail_notes">Eliminar todas las notas</string>
 
 </resources>

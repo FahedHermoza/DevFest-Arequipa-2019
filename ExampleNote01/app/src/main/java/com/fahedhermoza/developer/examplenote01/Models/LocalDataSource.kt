@@ -29,6 +29,12 @@ open class LocalDataSource (application: Application) {
         }
     }
 
+    fun deleteAll() {
+        thread {
+            noteDao.deleteAll()
+        }
+    }
+
     fun update(note: Note) {
         thread {
             noteDao.update(note)

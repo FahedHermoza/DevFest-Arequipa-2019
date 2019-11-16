@@ -4,9 +4,8 @@ import android.content.Intent
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fahedhermoza.developer.examplenote01.Adapter.NoteListAdapter
 import com.fahedhermoza.developer.examplenote01.Models.LocalDataSource
@@ -31,11 +30,14 @@ class NotesActivityFragment : Fragment() {
     private val compositeDisposable = CompositeDisposable()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_notes, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         //Insertar data
         //insertDataDefaultEXECUTORS()
         //adapter = NoteListAdapter(context!!)
@@ -68,6 +70,13 @@ class NotesActivityFragment : Fragment() {
         Executors.newSingleThreadExecutor().execute {
             val noteDao = NoteRoomDatabase.getDatabase(activity!!.application).noteDao()
             adapter.setNotes(noteDao.getAlphabetizedNotes())
+        }
+    }
+
+    private fun deleteDataEXECUTORS(){
+        Executors.newSingleThreadExecutor().execute {
+            val noteDao = NoteRoomDatabase.getDatabase(activity!!.application).noteDao()
+            noteDao.deleteAll()
         }
     }
 
@@ -139,5 +148,17 @@ class NotesActivityFragment : Fragment() {
     fun navigationToDetailNotes(){
         val intent = Intent(context, DetailNotesActivity::class.java)
         startActivity(intent)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        return inflater.inflate(R.menu.menu_notes, menu);
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.action_all_delete){
+            dataSource.deleteAll()
+            Toast.makeText(activity, "Notas eliminadas", Toast.LENGTH_SHORT).show()
+        }
+        return false
     }
 }
