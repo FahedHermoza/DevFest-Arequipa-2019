@@ -1,6 +1,7 @@
 package com.fahedhermoza.developer.examplenote01
 
 import android.content.Intent
+import android.graphics.Movie
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.util.Log
@@ -18,6 +19,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_notes.*
+import java.util.HashSet
 import java.util.concurrent.Executors
 
 /**
@@ -158,7 +160,24 @@ class NotesActivityFragment : Fragment() {
         if(item.itemId == R.id.action_all_delete){
             dataSource.deleteAll()
             Toast.makeText(activity, "Notas eliminadas", Toast.LENGTH_SHORT).show()
+        }else if (item.itemId == R.id.deleteMenuItem) {
+            onDeleteTapped(adapter.selectedNotes)
         }
         return false
+    }
+
+    fun onDeleteTapped(selectedNotes: HashSet<*>) {
+        for (note in selectedNotes) {
+            dataSource.delete(note as Note)
+        }
+        if (selectedNotes.size == 1) {
+            showToast("Nota eliminada")
+        } else if (selectedNotes.size > 1) {
+            showToast("Notas eliminadas")
+        }
+    }
+
+    fun showToast(string: String) {
+        Toast.makeText(context, string, Toast.LENGTH_LONG).show()
     }
 }
